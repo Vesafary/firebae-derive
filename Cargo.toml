@@ -3,6 +3,17 @@ name = "firebae-derive"
 version = "0.1.0"
 edition = "2021"
 
+description = "Derive macros for firebae-cm"
+license = "MIT"
+homepage = "https://github.com/Vesafary/firebae-derive"
+repository = "https://github.com/Vesafary/firebae-derive"
+
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
+[lib]
+proc-macro = true
+
 [dependencies]
+syn =               { version = "2.0.5" }
+quote =             { version = "1.0.26" }
+proc-macro2 =       { version = "1.0.53" }
