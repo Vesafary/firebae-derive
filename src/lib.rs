@@ -38,9 +38,10 @@ pub fn impl_as_firebase_map(input: TokenStream) -> TokenStream {
 
     let inserts = fields.into_iter().map(|f| {
         let name = f.ident.unwrap();
-
-        quote! {
-            h.insert(stringify!(#name), &self.#name);
+        match &f.ty {
+            syn::Type::Path(tp) if tp.path.segments.last().map_or(false, |s| s.ident == "Option") =>
+                quote! { if let Some(ref val) = self.#name { h.insert(stringify!(#name), val); } },
+            _ => quote! { h.insert(stringify!(#name), &self.#name); },
         }
     });
 
